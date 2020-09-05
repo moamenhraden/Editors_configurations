@@ -50,15 +50,22 @@
 * customizing key binding 
 #+BEGIN_SRC emacs-lisp
 
-  (global-set-key "\M-o"  'other-window)        ; change quickly between windows, default C-x o
-  (global-set-key "\C-cc" (quote compile))      ; compile in buffers directory, usually via 'make'
-  (global-set-key "\C-cl" 'auto-fill-mode)      ; toggle whether emacs wraps/newlines text or not
-  (global-set-key "\C-cp" 'replace-string)      ; query for find/replace and replace all
-  (global-set-key "\M-j"  'join-line)           ; join current line with line above
-  (global-set-key "\C-xg" 'magit-status)        ; emacs interface to git called 'Magit'
-  (global-set-key "\C-ck" 'browse-kill-ring)    ; examine the "cut" text newest to oldest
-  (global-set-key "\C-cv" 'find-file-at-point)  ; treat text at point as a file name and open it
-  (global-set-key "\C-cd" 'set-comment-column)  ; set how for righ-hand comments appear, use C-; to introduce comments
+    (global-set-key "\M-o"  'other-window)        ; change quickly between windows, default C-x o
+    (global-set-key "\C-cc" (quote compile))      ; compile in buffers directory, usually via 'make'
+    (global-set-key "\C-cl" 'auto-fill-mode)      ; toggle whether emacs wraps/newlines text or not
+    (global-set-key "\C-cp" 'replace-string)      ; query for find/replace and replace all
+    (global-set-key "\M-j"  'join-line)           ; join current line with line above
+    (global-set-key "\C-xg" 'magit-status)        ; emacs interface to git called 'Magit'
+    (global-set-key "\C-ck" 'browse-kill-ring)    ; examine the "cut" text newest to oldest
+    (global-set-key "\C-cv" 'find-file-at-point)  ; treat text at point as a file name and open it
+
+#+END_SRC
+* undo-tree 
+#+BEGIN_SRC emacs-lisp
+
+(use-package undo-tree
+  :ensure t)
+(undo-tree-mode 1) 
 
 #+END_SRC
 
@@ -207,30 +214,19 @@ open."
 #+END_SRC
 * magit 
 #+BEGIN_SRC emacs-lisp
-(use-package magit
-    :ensure t
-    :init
-    (progn
-(setq magit-section-initial-visibility-alist
-      '((stashes . hide) (untracked . hide) (unpushed . hide)))
+  (use-package magit
+      :ensure t
+      :init
+      (progn
+  (setq magit-section-initial-visibility-alist
+	'((stashes . hide) (untracked . hide) (unpushed . hide)))
 
 
-    (bind-key "C-c g" 'magit-status)
-    ))
+      (bind-key "C-c g" 'magit-status)
+      ))
+      
 
-(setq magit-status-margin
-  '(t "%Y-%m-%d %H:%M " magit-log-margin-width t 18))
-
-    (use-package git-timemachine
-    :ensure t
-    )
-
-(use-package git-gutter-fringe
-:ensure t
-:config
-(global-git-gutter-mode))
-
-
+ (require 'evil-magit)
 #+END_SRC
 
 #+RESULTS:
