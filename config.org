@@ -36,6 +36,9 @@
 (use-package doom-modeline
   :ensure t)
 (doom-modeline-init)
+
+;; line numbers 
+(display-line-numbers-mode 1 )
 #+END_SRC
 
 * themes 
@@ -202,3 +205,33 @@ open."
 
 
 #+END_SRC
+* magit 
+#+BEGIN_SRC emacs-lisp
+(use-package magit
+    :ensure t
+    :init
+    (progn
+(setq magit-section-initial-visibility-alist
+      '((stashes . hide) (untracked . hide) (unpushed . hide)))
+
+
+    (bind-key "C-c g" 'magit-status)
+    ))
+
+(setq magit-status-margin
+  '(t "%Y-%m-%d %H:%M " magit-log-margin-width t 18))
+
+    (use-package git-timemachine
+    :ensure t
+    )
+
+(use-package git-gutter-fringe
+:ensure t
+:config
+(global-git-gutter-mode))
+
+
+#+END_SRC
+
+#+RESULTS:
+: t
